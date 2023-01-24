@@ -1,0 +1,2 @@
+Primero exporta el lote desde workbench a excel, despues en el excel enumeralos,y copialos a Access, en acces, ve a fichas y dale en imprimir
+Tambien puedes editar la plantilla desde el editor en access en vista de edicion.
