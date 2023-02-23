@@ -194,3 +194,12 @@ cd daloup
 mysql -p -u root radius < /root/daloup/ubuntu/base.sql
 ```
 
+sudo nano -l /var/www/html/daloradius/library/exten-radius_server_info.php
+
+from:
+
+<td class='summaryKey'> MySQL </td> <td class='summaryValue'><span class='sleft'><?php echo check_service("mysql"); ?></span> </td>
+
+to:
+
+<td class='summaryKey'> MariaDB </td> <td class='summaryValue'><span class='sleft'><?php echo check_service("mariadb"); ?></span> </td>
