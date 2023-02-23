@@ -33,7 +33,7 @@
 #
 #  The 'check_name' parameter is the name of the 'check'
 #  attribute to use to access the counter in the 'users' file
-#  or SQL radcheck or radgroupcheck tables.
+#  or SQL radcheck or radcheckgroup tables.
 #
 #  DEFAULT  Max-Daily-Session > 3600, Auth-Type = Reject
 #      Reply-Message = "You've used up more than one hour today"
@@ -54,20 +54,6 @@ sqlcounter dailycounter {
 
 	key = User-Name
 	reset = daily
-
-	$INCLUDE ${modconfdir}/sql/counter/${dialect}/${.:instance}.conf
-}
-
-sqlcounter weeklycounter {
-	sql_module_instance = sql
-	dialect = ${modules.sql.dialect}
-
-	counter_name = Weekly-Session-Time
-	check_name = Max-Weekly-Session
-	reply_name = Session-Timeout
-
-	key = User-Name
-	reset = weekly
 
 	$INCLUDE ${modconfdir}/sql/counter/${dialect}/${.:instance}.conf
 }
@@ -113,3 +99,28 @@ sqlcounter expire_on_login {
 
 	$INCLUDE ${modconfdir}/sql/counter/${dialect}/${.:instance}.conf
 }
+sqlcounter access_period {
+        sql_module_instance = sql
+        dialect = ${modules.sql.dialect}
+
+        counter_name = Max-Access-Period-Time
+        check_name = Access-Period
+        key = User-Name
+        reset = never
+
+        $INCLUDE ${modconfdir}/sql/counter/${dialect}/${.:instance}.conf
+}
+
+sqlcounter quotalimit {
+        sql_module_instance = sql
+        dialect = ${modules.sql.dialect}
+
+        counter_name = Max-Volume
+        check_name = Max-Data
+        reply_name = Mikrotik-Total-Limit
+        key = User-Name
+        reset = never
+
+        $INCLUDE ${modconfdir}/sql/counter/${dialect}/${.:instance}.conf
+}
+
